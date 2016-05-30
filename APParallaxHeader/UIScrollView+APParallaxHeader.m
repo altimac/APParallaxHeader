@@ -3,7 +3,7 @@
 //
 //  Created by Mathias Amnell on 2013-04-12.
 //  Copyright (c) 2013 Apping AB. All rights reserved.
-//
+// Modified by Aurelien HUGELE May 2016
 
 #import "UIScrollView+APParallaxHeader.h"
 
@@ -16,7 +16,7 @@ static char contentOffsetContext;
 @property (nonatomic, readwrite) APParallaxTrackingState state;
 
 @property (nonatomic, weak) UIScrollView *scrollView;
-@property (nonatomic, readwrite) CGFloat originalTopInset;
+//@property (nonatomic, readwrite) CGFloat originalTopInset;
 @property (nonatomic) CGFloat parallaxHeight;
 @property (nonatomic) CGFloat parallaxMinHeight;
 
@@ -61,7 +61,7 @@ static char UIScrollViewParallaxView;
         parallaxView.parallaxMinHeight = minHeight;
         [self addSubview:parallaxView];
         
-        parallaxView.originalTopInset = self.contentInset.top;
+        //parallaxView.originalTopInset = self.contentInset.top;
         
         UIEdgeInsets newInset = self.contentInset;
         newInset.top = height;
@@ -103,7 +103,7 @@ static char UIScrollViewParallaxView;
         
         [self addSubview:parallaxView];
         
-        parallaxView.originalTopInset = self.contentInset.top;
+        //parallaxView.originalTopInset = self.contentInset.top;
         
         UIEdgeInsets newInset = self.contentInset;
         newInset.top = height;
@@ -143,10 +143,6 @@ static char UIScrollViewParallaxView;
 
 - (BOOL)showsParallax {
     return !self.parallaxView.hidden;
-}
-
-- (void)didMoveToSuperview {
-    [super didMoveToSuperview];
 }
 
 @end
@@ -305,7 +301,7 @@ static char UIScrollViewParallaxView;
         // Correct the scroll indicator position
         // Without this the scroll indicator will be displayed on top of the parallax view
         if (self.scrollView.contentOffset.y < -self.parallaxHeight) {
-            [self.scrollView setScrollIndicatorInsets:UIEdgeInsetsMake(self.scrollView.contentInset.top+(abs(self.scrollView.contentOffset.y)-self.parallaxHeight), 0, 0, 0)];
+            [self.scrollView setScrollIndicatorInsets:UIEdgeInsetsMake(self.scrollView.contentInset.top+(fabs(self.scrollView.contentOffset.y)-self.parallaxHeight), 0, 0, 0)];
         }
         else {
             [self.scrollView setScrollIndicatorInsets:UIEdgeInsetsMake(self.scrollView.contentInset.top, 0, 0, 0)];
