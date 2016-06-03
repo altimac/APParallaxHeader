@@ -85,6 +85,7 @@ static char UIScrollViewParallaxView;
 }
 
 - (void)addParallaxWithView:(UIView*)view andHeight:(CGFloat)height andMinHeight:(CGFloat)minHeight andShadow:(BOOL)shadow {
+    //NSLog(@"%s - height:%.2f minHeight:%.2f",__PRETTY_FUNCTION__,height,minHeight);
     if(self.parallaxView) {
         [self.parallaxView.customView removeFromSuperview];
         [view setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
